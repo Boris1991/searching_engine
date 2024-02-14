@@ -1,3 +1,8 @@
+#include <vector>
+#include <string>
+
+#include "ConverterJSON.h"
+
 /**
 * Метод получения содержимого файлов
 * @return Возвращает список с содержимым файлов перечисленных
@@ -20,7 +25,3 @@ std::vector<std::string> ConverterJSON::GetRequests() {}
 * Положить в файл answers.json результаты поисковых запросов
 */
 void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers) {}
-
-
-#endif
-
