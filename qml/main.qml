@@ -5,12 +5,20 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.15
 import QtQuick.Dialogs 1.3
 
+import Сonverter 1.0
+
 Window {
     id: root
     visible: true
     title: "ITBox"
     width: 640
     height: 480
+    
+    ConverterJSON {
+        id: converterJson
+    }
+
+    
     ColumnLayout {
 		id: layout
         spacing: 30
@@ -20,7 +28,7 @@ Window {
             text: "ITBox"
             font.family: "Helvetica"
             font.pixelSize: 48
-            color: "#3498db" // A nice shade of blue
+            color: "#3498db" 
             Layout.alignment: Qt.AlignHCenter 
         }
 		
@@ -53,12 +61,23 @@ Window {
 			selectFolder: true
 			onAccepted: {
 				console.log("Selected Folder:", fileDialog.folder)
-				search_string.text = fileDialog.folder
+				var folderPath = fileDialog.folder.toString().replace("file://", "");
+				folderText.text = folderPath
+				converterJson.LoadingToConfigJSON(folderText.text)
 			}
 			onRejected: {
 				console.log("Canceled")
 			}
 		}
+		
+		Text {
+			id: folderText
+            text: ""
+            font.family: "Helvetica"
+            font.pixelSize: 18
+            color: "lightgrey" 
+            Layout.alignment: Qt.AlignHCenter 
+        }
 
     }
 }
